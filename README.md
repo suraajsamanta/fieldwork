@@ -37,20 +37,71 @@ You can also ask an agent to read a skill directly from this checkout without in
 
 ## Use
 
-Example requests after installing the relevant skills:
+The examples below follow a customer onboarding project from an unclear request to a working tool. You can use any skill independently. Sample prompts assume the relevant skill is installed.
+
+### groundwork: when the request is vague
+
+A client says, "We need AI to speed up customer onboarding." You need to understand who is affected, what "faster" means, and which constraints matter before choosing a solution.
 
 ```text
-Use $groundwork on this request: customer onboarding takes too long.
-What do we need to understand before choosing a solution?
+Use $groundwork on this client request: "We need AI to speed up customer
+onboarding." Help me define the problem, identify the questions that could
+change our approach, and write a brief with proposed success criteria.
+```
 
+### follow-the-friction: when you need to find the cause
+
+You have CRM status histories and operations notes, but you do not know whether delays come from missing documents, reviewer queues, or repeated corrections. Use this skill to investigate before deciding what to automate.
+
+```text
+Use $follow-the-friction to examine these onboarding status histories
+and operations notes. Separate waiting time from handling time, compare
+normal and reopened cases, and identify the strongest bottleneck hypotheses.
+Explain what the evidence cannot tell us yet.
+```
+
+### first-mile: when you need to choose what to build
+
+Suppose your investigation finds that reviewers repeatedly check documents for missing information. You could improve the intake checklist, require structured forms, or build an AI extraction assistant. You need a defensible choice and a manageable first version.
+
+```text
 Use $first-mile to compare a process change, a rules-based tool,
-and an AI assistant for this onboarding workflow.
+and an AI document assistant using this workflow evidence. Recommend
+the smallest useful pilot, including exclusions, dependencies, and
+the conditions under which we should stop or change direction.
+```
 
-Use $system-blueprint to design the selected approach.
+### system-blueprint: when the scope is clear but the design is not
+
+You have selected an assistant that extracts document fields for a reviewer to approve. Now you need to decide how uploads, extraction jobs, CRM records, permissions, and review decisions fit together, including what happens when a document changes or extraction fails.
+
+```text
+Use $system-blueprint to design our document review assistant.
 We have a CRM, a document store, and two operations reviewers.
+Define the data model, integration contracts, access rules, and recovery
+paths for failed extraction and documents replaced during review.
+```
 
-Use $reality-check to evaluate this prototype against the manual baseline.
-Separate measured results from assumptions and proposed tests.
+### reality-check: when a demo looks good but you need evidence
+
+The prototype extracts fields successfully in a few demonstrations. Before proposing a pilot, you need to know how it handles missing or contradictory information, whether reviewers save time, and what each reviewed case costs.
+
+```text
+Use $reality-check to evaluate this prototype against manual review.
+Use the supplied labeled documents to assess extraction errors, false
+completeness, reviewer effort, latency, and cost. Separate checks you
+actually run from proposed tests and unmeasured business impact.
+```
+
+### last-mile: when you are ready to deliver a working slice
+
+The scope and design are agreed, but the application still needs a complete reviewer journey. Use this skill to implement upload, extraction, correction, and saving a reviewed result, then verify the journey and prepare a handoff.
+
+```text
+Use $last-mile to implement the agreed document review workflow in this
+repository. Include manual review when extraction fails, verify the
+acceptance criteria, and document setup and recovery steps. The target
+for this task is a locally runnable pilot.
 ```
 
 **Interview practice:** say you want a mock interview and specify a time budget if you have one. The agent asks one high-value question at a time, leaves the reasoning to you, then gives feedback. Ask for a worked solution when you want a demonstration instead. These are independent practice tools, not official materials or representations of any employer's interview process. Follow the rules of any actual assessment.
